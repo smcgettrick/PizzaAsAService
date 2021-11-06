@@ -10,7 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using PizzaAsAService.MenuService.Api.Data;
+using PizzaAsAService.MenuService.Api.Data.Interfaces;
 
 namespace PizzaAsAService.MenuService.Api
 {
@@ -26,12 +29,18 @@ namespace PizzaAsAService.MenuService.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MenuDatabaseSettings>(Configuration.GetSection(nameof(MenuDatabaseSettings)));
+
+            services.AddSingleton<IMenuDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<MenuDatabaseSettings>>().Value);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PizzaAsAService.MenuService.Api", Version = "v1" });
             });
+
+            services.AddTransient<IMenuContext, MenuContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
