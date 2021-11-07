@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+    menudb:
+        container_name: menudb
+        restart: always
+        volumes:
+            - ${WEBAPP_STORAGE_HOME}/site:/data/db
+        ports:
+            - "27017:27017"

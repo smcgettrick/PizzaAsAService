@@ -1,10 +1,10 @@
-﻿using MongoDB.Driver;
+﻿using System.Collections.Generic;
+using MongoDB.Driver;
 using PizzaAsAService.MenuService.Api.Entities;
-using System.Collections.Generic;
 
 namespace PizzaAsAService.MenuService.Api.Data;
 
-public class MenuContextSeed
+public class MenuDbContextSeed
 {
     public static void SeedData(IMongoCollection<Product> products)
     {
@@ -16,7 +16,7 @@ public class MenuContextSeed
     {
         return new List<Product>
         {
-            new Product
+            new()
             {
                 Name = "Small Cheese Pizza",
                 Category = nameof(Categories.Pizza),
@@ -27,4 +27,3 @@ public class MenuContextSeed
         };
     }
 }
-

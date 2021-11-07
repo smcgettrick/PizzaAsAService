@@ -4,16 +4,16 @@ using PizzaAsAService.MenuService.Api.Entities;
 
 namespace PizzaAsAService.MenuService.Api.Data;
 
-public class MenuContext : IMenuContext
+public class MenuDbDbContext : IMenuDbContext
 {
-    public MenuContext(IMenuDatabaseSettings settings)
+    public MenuDbDbContext(IMenuDatabaseSettings settings)
     {
         var client = new MongoClient(settings.ConnectionString);
         var database = client.GetDatabase(settings.DatabaseName);
 
         Products = database.GetCollection<Product>(settings.CollectionName);
 
-        MenuContextSeed.SeedData(Products);
+        MenuDbContextSeed.SeedData(Products);
     }
 
     public IMongoCollection<Product> Products { get; }
