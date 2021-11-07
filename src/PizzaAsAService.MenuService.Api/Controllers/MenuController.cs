@@ -43,6 +43,7 @@ namespace PizzaAsAService.MenuService.Api.Controllers;
 
         [Route("[action]/{name}")]
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IReadOnlyCollection<Product>>> GetProductByName(string name)
         {
@@ -56,6 +57,7 @@ namespace PizzaAsAService.MenuService.Api.Controllers;
 
         [Route("[action]/{category}")]
         [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IReadOnlyCollection<Product>>> GetProductByCategory(string category)
         {
