@@ -3,3 +3,6 @@ version: '3.8'
 services:
     menudb:
         image: mongo
+    
+    basketdb:
+        image: redis
